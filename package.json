@@ -1,0 +1,36 @@
+{
+  "name": "devpath-it-courses",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "html": "node scripts/build-html.js",
+    "html:watch": "node --watch-path=src/views --watch-path=src/i18n --watch-path=api/db.json scripts/build-html.js",
+    "dev:vite": "npm run html && concurrently \"npm:html:watch\" \"vite\" \"json-server --watch api/db.json --routes api/routes.json --port 5174\"",
+    "build:vite": "npm run lint && npm run html && npm run validate && vite build",
+    "preview:vite": "vite preview",
+    "lint": "eslint .",
+    "validate": "html-validate index.html courses.html course.html enroll.html && node scripts/check-links.js",
+    "deploy": "npm run build:vite && gh-pages -d dist"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "sass": "^1.80.0",
+    "eslint": "^9.8.0",
+    "concurrently": "^8.2.2",
+    "json-server": "^0.17.4",
+    "ejs": "^3.1.10",
+    "@eslint/js": "^9.8.0",
+    "globals": "^15.9.0",
+    "html-validate": "^8.24.0",
+    "gh-pages": "^6.1.1"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dayjs": "^1.11.11"
+  },
+  "description": "DevPath — Online IT Courses Catalog (KPI web labs, KN-43)",
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}
